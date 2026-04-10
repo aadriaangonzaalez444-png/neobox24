@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Micr0Store — Calidad sin drama</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #111;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 62px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 14px 28px;
+            margin-top: 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .products {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .product img {
+            width: 300px;
+            border-radius: 12px;
+        }
+
+        .product h2 {
+            margin-top: 0;
+            font-size: 32px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .add-btn {
+            padding: 10px 18px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* CARRITO */
+        .cart {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #111;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .cart-box {
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.15);
+            display: none;
+            width: 300px;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 40px;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Micr0Store</div>
+    <nav>
+        <a href="#productos">Productos</a>
+        <a href="mailto:micr0store@gmail.com">Contacto</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Micr0Store</h1>
+    <p>Equipamiento top al precio más bajo de internet.</p>
+    <a class="btn" href="#productos">Ver Productos</a>
+</section>
+
+<section id="productos" class="products">
+
+    <!-- PRODUCTO 1 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1581091870636-0ecdcf2a6f6a?auto=format&fit=crop&w=1200&q=80">
+        <div>
+            <h2>Micrófono Lavalier Pro — Modelo 1</h2>
+            <div class="price">14,99€</div>
+            <p>Calidad brutal para creadores, entrevistas y contenido diario.</p>
+            <button class="add-btn" onclick="addToCart('Micrófono Lavalier Pro', 14.99)">Añadir al carrito</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTO 2 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e8?auto=format&fit=crop&w=1200&q=80">
+        <div>
+            <h2>Luz LED Creativa — Modelo 1</h2>
+            <div class="price">11,99€</div>
+            <p>Iluminación soft y portable para grabación o directos.</p>
+            <button class="add-btn" onclick="addToCart('Luz LED Creativa', 11.99)">Añadir al carrito</button>
+        </div>
+    </div>
+
+</section>
+
+<!-- BOTÓN CARRITO -->
+<div class="cart" onclick="toggleCart()">🛒 Carrito (<span id="cart-count">0</span>)</div>
+
+<!-- CUADRO DEL CARRITO -->
+<div class="cart-box" id="cart-box">
+    <div id="cart-items"></div>
+    <div id="cart-total" style="margin-top: 10px; font-weight: bold;"></div>
+    <a id="checkout-link" class="checkout-btn" href="#">Hacer pedido</a>
+</div>
+
+<footer>
+    Micr0Store © 2026 — Calidad sin drama.
+</footer>
+
+
+<script>
+    let cart = [];
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        updateCart();
+    }
+
+    function updateCart() {
+        document.getElementById('cart-count').innerText = cart.length;
+
+        let html = "";
+        let total = 0;
+
+        cart.forEach(item => {
+            html += `<div class="cart-item">${item.name} - ${item.price.toFixed(2)}€</div>`;
+            total += item.price;
+        });
+
+        document.getElementById('cart-items').innerHTML = html;
+        document.getElementById('cart-total').innerText = "Total: " + total.toFixed(2) + "€";
+
+        // GENERAR EMAIL DEL PEDIDO
+        let productos = cart.map(i => `${i.name} (${i.price}€)`).join(", ");
+        let mail = `mailto:micr0store@gmail.com?subject=Nuevo Pedido Micr0Store&body=Productos: ${productos}%0A%0ATotal: ${total.toFixed(2)}€`;
+        document.getElementById('checkout-link').href = mail;
+    }
+
+    function toggleCart() {
+        let box = document.getElementById("cart-box");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
